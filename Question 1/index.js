@@ -40,8 +40,10 @@ const getBearerToken = async () => {
 
   try {
     const response = await axios.post(AUTH_URL, authData);
-    bearerToken = response.data.token;
+    bearerToken = response.data.access_token;
+    // Set token expiration time (assuming the token is valid for 1 hour)
     tokenExpirationTime = Date.now() + 3600000;
+    console.log("New token fetched:", bearerToken);
     return bearerToken;
   } catch (error) {
     console.error("Failed to fetch bearer token:", error);
